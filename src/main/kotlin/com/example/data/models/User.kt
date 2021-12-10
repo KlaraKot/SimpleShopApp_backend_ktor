@@ -10,4 +10,3 @@ data class User(
     val passwordHash: String
 ):Serializable
 
-val users = mutableListOf<User>()

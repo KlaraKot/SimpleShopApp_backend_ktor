@@ -1,18 +1,29 @@
 import com.example.data.models.User
 import com.example.data.models.users
+import com.example.modelsDB.UserDB
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
+import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.insert
 
 fun Route.addUser(){
+   /* Database.connect("jdbc:h2:mem:test", driver = "org.h2.Driver")
     post("/addUser"){
         val user = call.receive<User>()
-        users.add(user)
+
+        transaction{
+            UserDB.insert{
+                it[]
+            }
+        }
+
         call.respond(HttpStatusCode.Created, "User saved")
-    }
+    }*/
 }
 
 fun Route.getById(){
@@ -31,13 +42,11 @@ fun Route.getById(){
 
 fun Route.getAll(){
     get("/user/get/all"){
-        if(users.isNotEmpty()){
-            call.respond(users)
-        }
-        else{
-            call.respondText("no customers found", status = HttpStatusCode.NotFound)
-        }
+
+
+
     }
+
 }
 
 fun Route.deleteUser(){

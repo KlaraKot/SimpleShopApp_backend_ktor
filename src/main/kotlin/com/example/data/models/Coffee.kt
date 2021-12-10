@@ -9,4 +9,3 @@ data class Coffee(
     val amountLeft: Int,
 ): Serializable
 
-val ListOfcoffee= mutableListOf<Coffee>()

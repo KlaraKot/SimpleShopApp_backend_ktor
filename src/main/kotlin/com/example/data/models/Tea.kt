@@ -10,4 +10,3 @@ data class Tea(
 
 ): Serializable
 
-val teas = mutableListOf<Tea>()
