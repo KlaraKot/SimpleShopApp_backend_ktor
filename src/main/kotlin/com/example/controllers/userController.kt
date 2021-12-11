@@ -1,7 +1,9 @@
 package com.example.controllers
+import com.example.UserD
 import com.example.data.models.User
 import com.example.modelsDB.UserDB
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.selectAll
@@ -40,8 +42,27 @@ class userController {
 
     }
 
-    fun getById(){
+    fun getById(user: User){
+        transaction {
+            val tmpUser = UserDB.select { UserDB.userIdDB eq user.userId }
+        }
+    }
 
+    fun update(user: User){
+        transaction{
+            UserDB.update({UserDB.userIdDB eq user.userId}){
+                it[email] = user.email
+                it[name] = user.name
+                it[surname] = user.surname
+                it[passwordHash] = user.passwordHash
+            }
+        }
+    }
+
+    fun delete(id: String){
+        transaction{
+            UserDB.deleteWhere { UserDB.userIdDB eq id }
+        }
     }
 
 

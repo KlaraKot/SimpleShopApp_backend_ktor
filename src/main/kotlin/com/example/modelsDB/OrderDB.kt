@@ -5,8 +5,9 @@ import org.jetbrains.exposed.sql.Table.Dual.integer
 import org.jetbrains.exposed.sql.Table.Dual.references
 import org.jetbrains.exposed.sql.Table.Dual.uniqueIndex
 import org.jetbrains.exposed.sql.Table.Dual.varchar
+import org.jetbrains.exposed.sql.Table
 
-object OrderDB: Object() {
+object OrderDB: Table() {
     var ItemId: Column<String> = varchar("itemId", 50).uniqueIndex()
         .references(TeaDB.teaId)
     var amount: Column<Int> = integer("amount")

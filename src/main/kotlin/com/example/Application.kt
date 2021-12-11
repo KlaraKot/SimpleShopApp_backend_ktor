@@ -7,9 +7,6 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.engine.embeddedServer
 import com.example.plugins.*
-import com.example.routes.allBasketRoutes
-import com.example.routes.allCoffeeRoutes
-import com.example.routes.allTeaRoutes
 import io.ktor.application.*
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -33,25 +30,11 @@ object UserD: Table() {
 
 }
 
-fun main(){
-
-    Database.connect("jdbc:sqlite:file:test?mode=memory&cache=shared", "org.sqlite.JDBC")
-
-    transaction{
-        SchemaUtils.create(UserD)
-
-        UserD.insert{
-
-        }
-
-    }
-
-}
 
 
 
 
-/*
+
 
 fun main() {
     fun main(args: Array<String>) {
@@ -64,10 +47,10 @@ fun main() {
     embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
         configureRouting()
         allUserRoutes()
-        allTeaRoutes()
-        allCoffeeRoutes()
-        allBasketRoutes()
+      //  allTeaRoutes()
+     //   allCoffeeRoutes()
+     //   allBasketRoutes()
 
     }.start(wait = true)
 }
-*/
+
