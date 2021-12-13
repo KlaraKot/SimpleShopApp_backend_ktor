@@ -16,7 +16,7 @@ fun Route.addUser(){
     }
 }
 
-fun Route.getById(){//tu jeszcze naprawic
+fun Route.getById(){
     val userController = UserController()
     get("/user/get/{id}"){
         val id = call.parameters["id"] ?: return@get call.respondText(
@@ -29,7 +29,7 @@ fun Route.getById(){//tu jeszcze naprawic
 
 fun Route.getAll(){
     val userController = UserController()
-    get("/user/all"){
+    get("/user/all/"){
         call.respond(userController.getAll())
     }
 

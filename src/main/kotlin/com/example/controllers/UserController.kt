@@ -38,9 +38,22 @@ class UserController {
         return users
     }
 
-    fun getById(id: String):Query{
-        val tmpUser = UserDB.select { UserDB.userId eq id }
-        return tmpUser
+    fun getById(id: String):ArrayList<User>{
+        val user: ArrayList<User> = arrayListOf()
+        transaction {
+            UserDB.select{UserDB.userId eq id}.map{
+                user.add(
+                    User(
+                        userId = it[UserDB.userId],
+                        email = it[UserDB.email],
+                        name = it[UserDB.name],
+                        surname = it[UserDB.surname],
+                        passwordHash = it[UserDB.passwordHash]
+                    )
+                )
+            }
+        }
+        return user
     }
 
     fun update(user: User){

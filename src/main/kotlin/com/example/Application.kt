@@ -1,7 +1,7 @@
 package com.example
 
 import allUserRoutes
-import com.example.modelsDB.UserDB
+import com.example.modelsDB.*
 import io.ktor.server.netty.*
 import io.ktor.server.engine.embeddedServer
 import com.example.plugins.*
@@ -16,7 +16,6 @@ import io.ktor.routing.*
 import org.jetbrains.exposed.sql.*
 import org.slf4j.event.Level
 import org.jetbrains.exposed.sql.SchemaUtils
-import com.example.modelsDB.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
 
@@ -25,11 +24,12 @@ fun main(args: Array<String>) {
 
     Database.connect("jdbc:sqlite:./data/data.db", "org.sqlite.JDBC")
 
-  //  DatabaseInitializer.createSchema()
 
     transaction{
 
-        SchemaUtils.create(UserDB)
+        SchemaUtils.drop(UserDB, CategoryDB, OrderDB, OrderDetailsDB, ProductDB)
+        SchemaUtils.create(UserDB, CategoryDB, OrderDB, OrderDetailsDB, ProductDB)
+
         UserDB.insert {
             it[userId] = "USR1"
             it[email] = "supermax@gmail.com"
@@ -73,13 +73,13 @@ fun main(args: Array<String>) {
         }
 
 
-
         configureRouting()
         allPostRoutes()
         allUserRoutes()
         allProductRoutes()
         allOrderRoutes()
         allOrderDetailsRoutes()
+
     }.start(wait = true)
 
 }
