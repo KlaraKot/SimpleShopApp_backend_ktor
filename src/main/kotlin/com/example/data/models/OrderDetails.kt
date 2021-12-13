@@ -4,7 +4,7 @@ import java.io.Serializable
 
 data class OrderDetails (
     val orderId: String,
-    val productID: String,
+    val productId: String,
     val price: Int,
     val quantity: Int
     ): Serializable

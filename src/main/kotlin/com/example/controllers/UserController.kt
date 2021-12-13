@@ -20,7 +20,7 @@ class UserController {
         }
     }
 
-    fun getAll(){
+    fun getAll():ArrayList<User>{
         val users: ArrayList<User> = arrayListOf()
         transaction{
             UserDB.selectAll().map{
@@ -35,13 +35,12 @@ class UserController {
                 )
             }
         }
-
+        return users
     }
 
-    fun getById(user: User){
-        transaction {
-            val tmpUser = UserDB.select { UserDB.userId eq user.userId }
-        }
+    fun getById(id: String):Query{
+        val tmpUser = UserDB.select { UserDB.userId eq id }
+        return tmpUser
     }
 
     fun update(user: User){

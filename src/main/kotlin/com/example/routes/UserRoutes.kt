@@ -1,4 +1,4 @@
-import com.example.controllers.userController
+import com.example.controllers.UserController
 import com.example.data.models.User
 import io.ktor.application.*
 import io.ktor.http.*
@@ -8,7 +8,7 @@ import io.ktor.routing.*
 
 
 fun Route.addUser(){
-    val userController = userController()
+    val userController = UserController()
     post("/addUser"){
         val user = call.receive<User>()
         userController.addUser(user)
@@ -17,20 +17,18 @@ fun Route.addUser(){
 }
 
 fun Route.getById(){//tu jeszcze naprawic
-    val userController = userController()
+    val userController = UserController()
     get("/user/get/{id}"){
         val id = call.parameters["id"] ?: return@get call.respondText(
             "Missing or malformed id",
             status = HttpStatusCode.BadRequest
         )
-        val user = call.receive<User>()
-        userController.getById(user)
-        call.respond(user)
+        call.respond(userController.getById(id))
     }
 }
 
 fun Route.getAll(){
-    val userController = userController()
+    val userController = UserController()
     get("/user/get/all"){
         call.respond(userController.getAll())
     }
@@ -38,7 +36,7 @@ fun Route.getAll(){
 }
 
 fun Route.deleteUser(){
-    val userController = userController()
+    val userController = UserController()
     delete("/user/delete/{id}"){
         val id = call.parameters["id"] ?: return@delete call.respond(HttpStatusCode.BadRequest)
         userController.delete(id)
