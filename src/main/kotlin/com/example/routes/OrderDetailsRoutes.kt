@@ -16,3 +16,9 @@ fun Route.getById(){
         call.respond(orderDetailsController.getOrderById(id))
     }
 }
+
+fun Application.allOrderDetailsRoutes(){
+    routing{
+        getById()
+    }
+}

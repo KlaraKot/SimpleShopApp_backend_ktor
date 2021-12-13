@@ -30,7 +30,7 @@ fun Route.getOrderById(){
 }
 
 
-fun Application.allBasketRoutes(){
+fun Application.allOrderRoutes(){
     routing{
         addOrder()
         getOrderById()

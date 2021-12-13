@@ -29,7 +29,7 @@ fun Route.getById(){//tu jeszcze naprawic
 
 fun Route.getAll(){
     val userController = UserController()
-    get("/user/get/all"){
+    get("/user/all"){
         call.respond(userController.getAll())
     }
 

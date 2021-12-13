@@ -6,6 +6,7 @@ val exposedVersion: String by project
 plugins {
     application
     kotlin("jvm") version "1.6.0"
+    kotlin("plugin.serialization") version "1.4.21"
 
 }
 
@@ -31,6 +32,9 @@ dependencies {
 
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+
+    implementation("io.ktor:ktor-serialization:$ktor_version")
+    implementation("io.ktor:ktor-gson:$ktor_version")
 
     implementation("org.xerial:sqlite-jdbc:3.36.0.2")
 }

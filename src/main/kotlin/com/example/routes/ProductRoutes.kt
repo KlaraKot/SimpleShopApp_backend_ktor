@@ -46,7 +46,7 @@ fun Route.getAll(){
 
 
 
-fun Application.allTeaRoutes(){
+fun Application.allProductRoutes(){
     routing{
         getByName()
         getByType()
