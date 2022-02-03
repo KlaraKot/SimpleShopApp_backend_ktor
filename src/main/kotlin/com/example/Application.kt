@@ -1,13 +1,14 @@
 package com.example
-
 import allUserRoutes
-import com.example.modelsDB.*
+import com.example.data.models.CategoryDB
+import com.example.data.models.OrderDB
+import com.example.data.models.OrderDetailsDB
+import com.example.data.models.ProductDB
 import io.ktor.server.netty.*
 import io.ktor.server.engine.embeddedServer
 import com.example.plugins.*
 import com.example.routes.allOrderDetailsRoutes
 import com.example.routes.allOrderRoutes
-import com.example.routes.allPostRoutes
 import com.example.routes.allProductRoutes
 import io.ktor.application.*
 import io.ktor.features.*
@@ -17,6 +18,7 @@ import org.jetbrains.exposed.sql.*
 import org.slf4j.event.Level
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
+import com.example.models.UserDB
 
 
 fun main(args: Array<String>) {
@@ -52,6 +54,36 @@ fun main(args: Array<String>) {
             it[passwordHash] = "WDC2007"
         }
 
+        ProductDB.insert{
+            it[productId] = "Coffee11"
+            it[name] = "Illy Arabica Selection"
+            it[type] = "Ziarnista"
+            it[price] = 20
+            it[weight] = 200
+            it[quantity] = 100
+            it[categoryId] = "Coffee1"
+
+        }
+        ProductDB.insert{
+            it[productId] = "Coffee12"
+            it[name] = "Kyoto Colombia"
+            it[type] = "Ziarnista"
+            it[price] = 23
+            it[weight] = 200
+            it[quantity] = 100
+            it[categoryId] = "Coffee1"
+
+        }
+        ProductDB.insert{
+            it[productId] = "Coffee13"
+            it[name] = "Nescaffe"
+            it[type] = "Rozpuszczalna"
+            it[price] = 10
+            it[weight] = 200
+            it[quantity] = 100
+            it[categoryId] = "Coffee1"
+
+        }
     }
 
 
@@ -74,7 +106,6 @@ fun main(args: Array<String>) {
 
 
         configureRouting()
-        allPostRoutes()
         allUserRoutes()
         allProductRoutes()
         allOrderRoutes()
